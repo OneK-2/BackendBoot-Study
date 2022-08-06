@@ -1,3 +1,4 @@
+/*
 package bootcamp.demo.service;
 
 import bootcamp.demo.mapper.UserMapper;
@@ -17,3 +18,4 @@ public class UserService {
         return userMapper.findAll();
     }
 }
+*/

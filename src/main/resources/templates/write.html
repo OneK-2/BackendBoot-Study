@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
+<th:block layout:fragment="title">
+    <title>글작성 페이지</title>
+</th:block>
+
+<th:block layout:fragment="content">
+    <div class="card-content">
+        <form id="saveForm" class="form-horizontal" method="post" autocomplete="off">
+            <!--/* 기존 게시글 수정인 경우, 서버로 전달할 게시글 번호(id) */-->
+            <input type="hidden" id="id" name="id" th:if="${post != null}" th:value="${post.id}" />
+
+            <!--/* 서버로 전달할 공지 여부 */-->
+            <input type="hidden" id="noticeYn" name="noticeYn" />
+
+            <div class="form-group">
+                <label for="isNotice" class="col-sm-2 control-label">공지글 설정</label>
+                <div class="col-sm-10" style="margin-top: 10px;">
+                    <input type="checkbox" id="isNotice" name="isNotice" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="title" class="col-sm-2 control-label">제목</label>
+                <div class="col-sm-10">
+                    <input type="text" id="title" name="title" class="form-control" maxlength="50" placeholder="제목을 입력해 주세요." />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="writer" class="col-sm-2 control-label">이름</label>
+                <div class="col-sm-10">
+                    <input type="text" id="writer" name="writer" class="form-control" maxlength="10" placeholder="이름을 입력해 주세요." />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="content" class="col-sm-2 control-label">내용</label>
+                <div class="col-sm-10">
+                    <textarea id="content" name="content" class="form-control" maxlength="1000" placeholder="내용을 입력해 주세요."></textarea>
+                </div>
+            </div>
+        </form>
+
+        <div class="btn_wrap text-center">
+            <a th:href="@{/list}" class="btn btn-default waves-effect waves-light">뒤로가기</a>
+            <button type="button" class="btn btn-primary waves-effect waves-light" onclick="savePost();">저장하기</button>
+        </div>
+    </div>
+</th:block>
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        window.onload = () => {
+            renderPostInfo();
+        }
+
+        // 게시글 상세정보 렌더링
+        function renderPostInfo() {
+            const post = [[ ${post} ]];
+            if ( !post ) {
+                return false;
+            }
+
+            const form = document.getElementById('saveForm');
+            const fields = ['id', 'title', 'content', 'writer', 'noticeYn'];
+            form.isNotice.checked = post.noticeYn;
+
+            fields.forEach(field => {
+                form[field].value = post[field];
+            })
+        }
+        // 게시글 저장(수정)
+        function savePost() {
+            const form = document.getElementById('saveForm');
+            const fields = [form.title, form.writer, form.content];
+            const fieldNames = ['제목', '이름', '내용'];
+
+            for (let i = 0, len = fields.length; i < len; i++) {
+                if ( !isValid(fields[i], fieldNames[i]) ) {
+                    return false;
+                }
+            }
+
+            form.noticeYn.value = form.isNotice.checked;
+            form.action = [[ ${post == null} ]] ? '/save' : '/update';
+            form.submit();
+        }
+
+        /*]]>*/
+    </script>
+</th:block>
+</html>

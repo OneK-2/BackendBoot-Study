@@ -1,4 +1,4 @@
-package bootcamp.demo.controller;
+/*package bootcamp.demo.controller;
 
 import bootcamp.demo.dto.ResponseDTO;
 import bootcamp.demo.service.UserService;
@@ -23,4 +23,4 @@ public class UserController {
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
-}
+}*/

@@ -1,3 +1,4 @@
+/*
 package bootcamp.demo.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -11,3 +12,4 @@ import java.util.HashMap;
 public interface UserMapper {
     ArrayList<HashMap<String, Object>> findAll();
 }
+*/

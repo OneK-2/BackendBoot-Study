@@ -1,3 +1,4 @@
+/*
 package bootcamp.demo.dto;
 
 public class ResponseDTO {
@@ -20,3 +21,4 @@ public class ResponseDTO {
         this.res = res;
     }
 }
+*/
