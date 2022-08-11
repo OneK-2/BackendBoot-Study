@@ -36,7 +36,8 @@ dependencies {
 	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
 	//implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.30'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
-	runtimeOnly 'mysql:mysql-connector-java:8.0.30'
+	runtimeOnly 'com.h2database:h2'
+	//runtimeOnly 'mysql:mysql-connector-java:8.0.30'
 
 }
 
